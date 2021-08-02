@@ -1,1 +1,1 @@
-# spring-initializer
+# spring-runner
