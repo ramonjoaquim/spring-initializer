@@ -9,15 +9,13 @@ clear();
 
 console.log(
     chalk.cyan(
-        figlet.textSync('Spring Initializer', {horizontalLayout: 'full'}),
+        figlet.textSync('Spring Runner', {horizontalLayout: 'full'}),
     ),
 );
 
 const run = async () => {
   const primaryQuestion = await inquirer.askFolderProjectRootLocation();
-
-  primaryQuestion.folderLocation =
-  '/home/shinobi/Desenvolvimento/betha/gestao-fiscal/backend';
+  primaryQuestion.folderLocation = '/home/shinobi/Desenvolvimento/';
 
   if (primaryQuestion.folderLocation.length) {
     const result = files.getDirectories(primaryQuestion.folderLocation);
@@ -27,13 +25,14 @@ const run = async () => {
     exec.clean(
         files
             .parseDirectories(primaryQuestion.folderLocation,
-                projects.selectedProjects))
+                projects.selectedProjects), primaryQuestion.showLogs)
         .then(exec
             .install(files.parseDirectories(primaryQuestion.folderLocation,
-                projects.selectedProjects), primaryQuestion.skipTests))
+                projects.selectedProjects), primaryQuestion.skipTests,
+            primaryQuestion.showLogs))
         .then(exec
             .run(files.parseDirectories(primaryQuestion.folderLocation,
-                projects.selectedProjects)));
+                projects.selectedProjects), primaryQuestion.showLogs));
   }
 };
 

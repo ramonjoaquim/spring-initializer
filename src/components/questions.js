@@ -30,6 +30,19 @@ module.exports = {
           }
         },
       },
+      {
+        name: 'showLogs',
+        type: 'list',
+        message: 'Show logs on console?',
+        choices: ['yes', 'no'],
+        validate: function(value) {
+          if (value.length) {
+            return true;
+          } else {
+            return 'Please select one option.';
+          }
+        },
+      },
     ];
     return inquirer.prompt(questions);
   },
